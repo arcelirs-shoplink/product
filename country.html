@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Choose Your Country</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+.container{
+    max-width:550px;
+    margin:auto;
+    background:#fff;
+    min-height:100vh;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    background:#fff;
+    padding:20px;
+    text-align:center;
+    font-size:34px;
+    font-weight:bold;
+    border-bottom:1px solid #eee;
+    z-index:100;
+}
+
+.search{
+    padding:15px;
+}
+
+.search input{
+    width:100%;
+    padding:14px;
+    border-radius:30px;
+    border:1px solid #ddd;
+    outline:none;
+    font-size:16px;
+}
+
+.country{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px;
+    margin:12px 15px;
+    background:white;
+    border-radius:18px;
+    border:1px solid #eee;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.country:hover{
+    background:#f7f7f7;
+    transform:scale(1.02);
+}
+
+.flag{
+    font-size:36px;
+}
+
+.name{
+    font-size:22px;
+    font-weight:bold;
+    color:#333;
+}
+
+.footer{
+    padding:30px;
+    text-align:center;
+    color:#888;
+    font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+Choose Your Country
+</div>
+
+<div class="search">
+
+<input
+type="text"
+id="search"
+placeholder="Search country...">
+
+</div>
+
+<div id="list">
+
+<div class="country" data-country="PH">
+<div class="flag">🇵🇭</div>
+<div class="name">Philippines</div>
+</div>
+
+<div class="country" data-country="SG">
+<div class="flag">🇸🇬</div>
+<div class="name">Singapore</div>
+</div>
+
+<div class="country" data-country="TW">
+<div class="flag">🇹🇼</div>
+<div class="name">Taiwan</div>
+</div>
+
+<div class="country" data-country="JP">
+<div class="flag">🇯🇵</div>
+<div class="name">Japan</div>
+</div>
+
+<div class="country" data-country="QA">
+<div class="flag">🇶🇦</div>
+<div class="name">Qatar</div>
+</div>
+
+<div class="country" data-country="IT">
+<div class="flag">🇮🇹</div>
+<div class="name">Italy</div>
+</div>
+
+<div class="country" data-country="AE">
+<div class="flag">🇦🇪</div>
+<div class="name">United Arab Emirates</div>
+</div>
+
+<div class="country" data-country="CA">
+<div class="flag">🇨🇦</div>
+<div class="name">Canada</div>
+</div>
+
+<div class="country" data-country="GB">
+<div class="flag">🇬🇧</div>
+<div class="name">United Kingdom</div>
+</div>
+
+<div class="country" data-country="US">
+<div class="flag">🇺🇸</div>
+<div class="name">United States</div>
+</div>
+
+<div class="country" data-country="AU">
+<div class="flag">🇦🇺</div>
+<div class="name">Australia</div>
+</div>
+
+</div>
+
+<div class="footer">
+
+Please select your country.
+
+</div>
+
+</div>
+
+<script>
+
+// Product link galing product.html
+
+const params=new URLSearchParams(location.search);
+
+const featuredLink=params.get("link");
+
+// Search
+
+const search=document.getElementById("search");
+
+search.addEventListener("input",()=>{
+
+const keyword=search.value.toLowerCase();
+
+document.querySelectorAll(".country").forEach(card=>{
+
+const text=card.innerText.toLowerCase();
+
+card.style.display=text.includes(keyword)
+?"flex":"none";
+
+});
+
+});
+
+// Redirect
+
+document.querySelectorAll(".country").forEach(card=>{
+
+card.onclick=()=>{
+
+if(!featuredLink){
+
+alert("Product link not found.");
+
+return;
+
+}
+
+const country=card.dataset.country;
+
+window.location.href=
+featuredLink+
+"&country="+country;
+
+};
+
+});
+
+</script>
+
+</body>
+</html>
